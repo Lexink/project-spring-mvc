@@ -9,7 +9,7 @@
     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="../static/style.css" rel="stylesheet">
+    <link href="static/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,15 +30,15 @@
         <td data-name="status" th:text="${task.status}"></td>
         <td>
             <button th:id="${task.id}+'_e'" class="is-edit">
-                <img src="../static/img/edit.png">
+                <img src="static/img/edit.png">
             </button>
             <button th:id="${task.id}+'_s'" class="is-save">
-                <img src="../static/img/save.png">
+                <img src="static/img/save.png">
             </button>
         </td>
         <td>
             <button th:id="${task.id}+'_d'" class="is-delete">
-                <img src="../static/img/delete.png">
+                <img src="static/img/delete.png">
             </button>
         </td>
     </tr>
@@ -112,5 +112,5 @@
     let statusNames = [[${statusNames}]];
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="../static/script.js"></script>
+<script src="static/script.js"></script>
 </html>

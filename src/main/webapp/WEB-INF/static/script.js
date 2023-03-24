@@ -111,7 +111,7 @@ function update(event, target){
         $.ajax( {
             type: "POST",
             async: false,
-            url: `/`,
+            url: getMainURL() + `/`,
             dataType: 'json',
             data: JSON.stringify(updatedParameters),
             contentType: "application/json; charset=utf-8",
@@ -124,8 +124,6 @@ function update(event, target){
     }
 }
 
-
-
 function deleteTask(event, target){
 
     event.preventDefault();
@@ -134,11 +132,20 @@ function deleteTask(event, target){
     let id = trElement.getAttribute("data-id");
 
     $.ajax({
-        url: `/${id}`,
+        url: getMainURL() + `/${id}`,
         type: 'DELETE',
         success: function(result) {
             console.log(result);
             //window.location.reload();
         }
     });
+}
+function getMainURL() {
+    let path = window.location.href;
+    let endPosition = path.indexOf('?');
+
+    if (endPosition > 0){
+        return path.substring(0, endPosition)
+    }
+    return path;
 }
