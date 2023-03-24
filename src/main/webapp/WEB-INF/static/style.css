@@ -1,0 +1,27 @@
+body {
+    background-color: dimgray;
+}
+.page-link {
+    color: gray;
+}
+.page-item.active .page-link  {
+    background-color: gray;
+    border-color: black;
+    color: whitesmoke;
+}
+
+tr.is-edit .is-edit {
+    display: none;
+}
+
+tr.is-edit .is-delete {
+    display: none;
+}
+
+tr.is-edit .is-save {
+    display: inline-block;
+}
+
+button.is-save {
+    display: none;
+}
