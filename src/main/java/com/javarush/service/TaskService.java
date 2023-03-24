@@ -9,20 +9,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class TaskService {
     private final TaskDAO taskDAO;
-
-    public Optional<Task> get(Integer id){
-       return taskDAO.findById(id);
-    }
-    public List<Task> getAllTasks() {
-        return taskDAO.findAll();
-    }
 
     public Page<Task> getAllTasks(Pageable pageable) {
         return taskDAO.findAll(pageable);

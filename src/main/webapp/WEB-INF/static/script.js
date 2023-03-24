@@ -45,7 +45,7 @@ function replaceElement(cell, tag, value, options){
             break;
     }
 }
-let button = document.querySelector(".is-edit");
+
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button)=> {
     button.addEventListener("click", (eventu)=> {
@@ -63,14 +63,12 @@ buttons.forEach((button)=> {
 function edit(event, target){
     event.preventDefault();
     event.stopPropagation();
-    console.warn("Edit.", event.currentTarget);
+
     let trElement = upTo(target, "tr");
-    let id = trElement.getAttribute("data-id");
 
     trElement.querySelectorAll("td").forEach((item)=> {
         const name = item.getAttribute("data-name");
         const text = item.innerHTML;
-        console.warn('Text: ',text)
 
         switch (name){
             case "description": replaceElement(item, "input", text);
@@ -81,7 +79,6 @@ function edit(event, target){
     });
 
     trElement.className = `is-edit`;
-    //row.className="is-save";
 }
 
 function update(event, target){
@@ -92,7 +89,7 @@ function update(event, target){
     let updatedParameters = new Object();
     updatedParameters.id = id;
     updatedParameters.description = "";
-        //const [data] = dataOnPage.filter((item)=>Number(item.id)===Number(id));
+
     trElement.querySelectorAll("td").forEach((item)=> {
             name = item.getAttribute("data-name");
             switch (name) {
@@ -104,7 +101,7 @@ function update(event, target){
                     break;
             }
     })
-    console.warn(updatedParameters);
+    console.log(updatedParameters);
 
     if (updatedParameters.description === "" || updatedParameters.status === ""){
         alert("Field \"description\" required and can't be empty!")
@@ -114,7 +111,7 @@ function update(event, target){
         $.ajax( {
             type: "POST",
             async: false,
-            url: `/update/${id}`,
+            url: `/`,
             dataType: 'json',
             data: JSON.stringify(updatedParameters),
             contentType: "application/json; charset=utf-8",
@@ -135,7 +132,7 @@ function deleteTask(event, target){
     event.stopPropagation();
     let trElement = upTo(target, "tr");
     let id = trElement.getAttribute("data-id");
-    console.warn("delete", id)
+
     $.ajax({
         url: `/${id}`,
         type: 'DELETE',
