@@ -13,5 +13,5 @@ public interface TaskDAO extends Repository<Task, Integer> {
     Page<Task> findAll(Pageable pageable);
 
     void deleteTaskById(Integer id);
-    Task save(Task task);
+    void save(Task task);
 }

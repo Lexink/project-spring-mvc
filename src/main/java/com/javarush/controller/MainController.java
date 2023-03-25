@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -34,7 +33,7 @@ public class MainController {
 
         int totalPages = page.getTotalPages();
         List<String> statusNames = Arrays.stream(Status.values())
-                .map(status->status.getStatusName())
+                .map(Status::getStatusName)
                 .collect(Collectors.toList());
         model.addAttribute("statusNames", statusNames);
         model.addAttribute("taskDTO", new TaskDTO());
@@ -50,24 +49,24 @@ public class MainController {
 
     @Transactional
     @PostMapping("/")
-    public String createTask(Model model, @ModelAttribute("taskDTO") TaskDTO taskDTO, @PageableDefault (sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable){
+    public String createTask(@ModelAttribute("taskDTO") TaskDTO taskDTO, @PageableDefault (sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable){
         service.createTask(taskDTO);
         Page<Task> page = service.getAllTasks(pageable);
-        Integer lastPage = page.getTotalPages()-1;
+        int lastPage = page.getTotalPages()-1;
         return "redirect:/?page=" + lastPage;
     }
 
     @Transactional
     @PostMapping(path="/", consumes = "application/json")
-    public String updateTask(Model model, @RequestBody TaskDTO taskDTO){
+    public String updateTask(@RequestBody TaskDTO taskDTO){
         service.updateTask(taskDTO);
         return "redirect:/?page=0";
     }
 
     @Transactional
     @DeleteMapping("/{id}")
-    public String deleteTask(Model model, @PathVariable Integer id, Pageable pageable){
-        if(Objects.isNull(id) || id <= 0) {
+    public String deleteTask(Model model, @PathVariable int id, Pageable pageable){
+        if(id <= 0) {
             throw new RuntimeException("Invalid id");
         }
         service.deleteTask(id);

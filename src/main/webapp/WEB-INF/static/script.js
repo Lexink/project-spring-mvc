@@ -33,28 +33,28 @@ function replaceElement(cell, tag, value, options){
     switch(tag){
         case "input": {
             cell.innerHTML="";
-            const input = createInput(value);
+            const input = createInput(value)
             cell.appendChild(input);
         }
             break;
         case "selector": {
             cell.innerHTML="";
-            const selector = createSelector(options, value);
+            const selector = createSelector(options, value)
             cell.appendChild(selector);
-        };
+        }
             break;
     }
 }
 
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('button')
 buttons.forEach((button)=> {
     button.addEventListener("click", (eventu)=> {
         const {target} = eventu;
-        if (button.className == "is-edit"){
+        if (button.className === "is-edit"){
             edit(eventu, target)
-        } else if (button.className == "is-save"){
+        } else if (button.className === "is-save"){
             update(eventu, target);
-        } else if (button.className == "is-delete") {
+        } else if (button.className === "is-delete") {
             deleteTask(eventu, target);
         }
     });
@@ -86,7 +86,7 @@ function update(event, target){
     event.stopPropagation();
     let trElement = upTo(target, "tr");
     let id = trElement.getAttribute("data-id");
-    let updatedParameters = new Object();
+    let updatedParameters = {};
     updatedParameters.id = id;
     updatedParameters.description = "";
 
@@ -115,11 +115,6 @@ function update(event, target){
             dataType: 'json',
             data: JSON.stringify(updatedParameters),
             contentType: "application/json; charset=utf-8",
-            success: function(response) {
-                console.log(response);
-                //window.location.reload();
-                //window.location.href="/?page=0&size=3"
-            }
         });
     }
 }
@@ -134,10 +129,6 @@ function deleteTask(event, target){
     $.ajax({
         url: getMainURL() + `/${id}`,
         type: 'DELETE',
-        success: function(result) {
-            console.log(result);
-            //window.location.reload();
-        }
     });
 }
 function getMainURL() {
